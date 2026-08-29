@@ -1,6 +1,18 @@
 # ggl-technical-assessment
 Public repo for my GGL technical assessment: Casino Game Recommendation &amp; Predictive Modelling
 
+## AI Use
+
+Minimal and for formatting and debugging only. NOT used for writing any core logic or interpretations.
+
+Prompt examples: 
+
+*"Fix the file-not-found error for my data importing code snippet."*
+
+*"Insert the images in the folder called 'images' into my README at the spots I indicated in the text."*
+
+*"My KMeans clustering code throws an error when I give it my data, help me format the data correctly. Don't scale or transform the data, all feature engineering has been completed."*
+
 ## Clone & Data Setup
 
 Clone the repo:
