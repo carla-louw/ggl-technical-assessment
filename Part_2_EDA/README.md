@@ -32,6 +32,8 @@
 
 **Outcome:** Most rows sit near the origin (low spins, low amount), consistent with the right-skew already noted in Part 2.5. Wager and Payout closely overlap at almost every spin count across the whole chart, not just on average - they track each other very tightly (see Part 7's causal analysis). 
 
+![Wager vs Payout](total_wager_vs_total_payout.png)
+
 ## Known limitation: this skew is structural, not noise
 
 Every distribution examined here - individual wagers, casino totals, and (by strong implication) player value - is heavily right-skewed in the same way. This is a known, expected property of gambling data: a small number of high-value players/casinos genuinely account for a disproportionate share of activity. **These are not outliers to be dropped** - they are a real, distinct population (whales), and removing them would throw away the signal that matters most commercially, not noise.
