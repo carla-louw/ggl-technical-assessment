@@ -4,9 +4,9 @@
 
 ## Part 7.1: What is causal analysis and how does it differ from classic ML?
 
-Simpson's paradox
+Let's look at this dataset of a population's Cholesterol levels vs the time spent exercising. 
 
-Pooled together, Exercise and Cholesterol look positively correlated - more exercise, higher cholesterol:
+Pooled together, Exercise and Cholesterol look positively correlated - more exercise, higher cholesterol. This is called Simpson's paradox.:
 
 ![Simpson's paradox - pooled data](images/Simpson1.png)
 
