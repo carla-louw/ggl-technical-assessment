@@ -155,16 +155,16 @@ Two things worth building in given the stakes:
 
 ## 3. Operational Risk
 
-- **Model degradation/drift** — all three models can go stale as player behaviour or the game catalog shifts.
+- **Model degradation/drift** - all three models can go stale as player behaviour or the game catalog shifts.
  *Mitigation*: the monitoring above, plus scheduled model reviews.
 
-- **Pipeline/data failures** — missing or delayed features, especially the live player buffer feeding the causal model.
+- **Pipeline/data failures** - missing or delayed features, especially the live player buffer feeding the causal model.
  *Mitigation*: upstream data validation and the fallback already mentioned — no intervention rather than acting on stale/incomplete data.
 
-- **Latency/availability risk on the real-time service** — if the causal model service is slow or down, interventions don't fire in time.
+- **Latency/availability risk on the real-time service** - if the causal model service is slow or down, interventions don't fire in time.
  *Mitigation*: route through existing NOC incident monitoring, since NOC is already set up for uptime alerts.
 
-- **Responsible gambling/regulatory risk** — this is the one I'd weigh most heavily given the domain. A missed or incorrect intervention isn't just a bad metric, it directly affects a player and sits inside our responsible-gambling obligations. Two failure directions matter:
+- **Responsible gambling/regulatory risk** - A missed or incorrect intervention isn't just a bad metric, it directly affects a player and sits inside our responsible-gambling obligations. Two failure directions matter:
   - **False negative** (should have intervened, didn't) can lead to risk of a harmful play pattern continuing unaddressed.
   - **False positive** (intervened unnecessarily) can lead to unnecessary cost (free game awarded), and overuse can undermine trust in the intervention system.
  *Mitigation*: audit logging of every prediction and action taken, human review for disputed/edge cases, and periodic compliance audits of intervention accuracy.
@@ -187,7 +187,7 @@ An increase in any of the three signals above (registrations, deposits, retentio
 
 ## 3. Additional Data
 
-Ideally, we'd model the player journey — both within sessions of play and across sessions.
+Ideally, we'd model the player journey - both within sessions of play and across sessions.
 
 Within-session, this includes all wagering and payout information across time i.e the full player buffer.
 
