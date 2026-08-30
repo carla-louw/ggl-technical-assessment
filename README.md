@@ -52,27 +52,27 @@ python Part_7_Causal_analysis/causal.py
 python Part_7_Predicting_player_count/predict_player_count.py  # -> player_count_model.pkl
 python Part_8_Scoring_scenario/score_new_game.py                # needs Part 7's pickled model
 ```
-# Part 1 — Data Modelling
+# Part 1 - Data Modelling
 
 See README in work folder.
 
-# Part 2 — Exploratory Data Analysis
+# Part 2 - Exploratory Data Analysis
 
 See README in work folder.
 
-# Part 3 — Game Similarity
+# Part 3 - Game Similarity
 
 See README in work folder.
 
-# Part 4 — Casino Cohorts
+# Part 4 - Casino Cohorts
 
 See README in work folder.
 
-# Part 5 — Recommendation System
+# Part 5 - Recommendation System
 
 See README in work folder.
 
-# Part 6 — Evaluating the Recommendation System
+# Part 6 - Evaluating the Recommendation System
 
 ## Evaluating during development:
 
@@ -87,19 +87,19 @@ I'd track adoption rate (% of recommended games a casino actually goes live with
 - Popularity bias/feedback loops (recommending the same big games reinforces their lead)
 - Sparse casino cohorts can produce noisy averages
 
-# Part 7 — Causal Analysis
+# Part 7 - Causal Analysis
 
 See README in work folder.
 
-# Part 7 — Predicting Player Count
+# Part 7 - Predicting Player Count
 
 See README in work folder.
 
-# Part 8 — Scoring Scenario
+# Part 8 - Scoring Scenario
 
 See README in work folder.
 
-# Part 9 — Production & Operations
+# Part 9 - Production & Operations
 
 ## 1. Deployment & Serving
 
@@ -122,7 +122,7 @@ Since this isn't time-critical (it's a config decision, not a live intervention)
 
 ### Causal Model
 
-This model needs to trigger automatically during a player's session. It can't sit inside the backoffice itself — the backoffice is built for admin/config workflows, not high-throughput low-latency inference on a live event stream. It needs to be deployed as its own real-time inference service, since the result has to trigger a cascade of events ending in an intervention during play (e.g. a free game award), and there's no room for delay.
+This model needs to trigger automatically during a player's session. It can't sit inside the backoffice itself - the backoffice is built for admin/config workflows, not high-throughput low-latency inference on a live event stream. It needs to be deployed as its own real-time inference service, since the result has to trigger a cascade of events ending in an intervention during play (e.g. a free game award), and there's no room for delay.
 
 Practically:
 
@@ -139,7 +139,7 @@ Two things worth building in given the stakes:
 
 ### Game Recommender and Player-Prediction Model
 
-- **Input/data monitoring**: feature drift (game catalog changes, new casinos, changing player demographics), and pipeline freshness — is the batch job actually completing on schedule.
+- **Input/data monitoring**: feature drift (game catalog changes, new casinos, changing player demographics), and pipeline freshness - is the batch job actually completing on schedule.
 - **Output monitoring**: distribution of recommendations (if it's suddenly recommending the same 3 games to everyone, that's a red flag), and operator acceptance/override rate as a proxy for usefulness.
 - **Retraining trigger**: mostly time-based (monthly/quarterly), since this isn't safety-critical, plus ad hoc retraining when new games or casinos are added.
 
@@ -151,7 +151,7 @@ Two things worth building in given the stakes:
   - Intervention followed by an extended session / player retained means the intervention was correct.
   - Intervention followed by player churn shortly after means the intervention was wrong or badly timed.
   - So the core ground-truth metric to track is post-intervention retention rate, not just trigger rate, since trigger rate on its own doesn't tell us if we intervened correctly.
-- **Retraining trigger**: trigger-based rather than purely calendar-based — a sustained drop in post-intervention retention, or drift in input features, should kick off retraining.
+- **Retraining trigger**: trigger-based rather than purely calendar-based - a sustained drop in post-intervention retention, or drift in input features, should kick off retraining.
 
 ## 3. Operational Risk
 
@@ -159,7 +159,7 @@ Two things worth building in given the stakes:
  *Mitigation*: the monitoring above, plus scheduled model reviews.
 
 - **Pipeline/data failures** - missing or delayed features, especially the live player buffer feeding the causal model.
- *Mitigation*: upstream data validation and the fallback already mentioned — no intervention rather than acting on stale/incomplete data.
+ *Mitigation*: upstream data validation and the fallback already mentioned - no intervention rather than acting on stale/incomplete data.
 
 - **Latency/availability risk on the real-time service** - if the causal model service is slow or down, interventions don't fire in time.
  *Mitigation*: route through existing NOC incident monitoring, since NOC is already set up for uptime alerts.
@@ -175,11 +175,11 @@ Two things worth building in given the stakes:
 
 The signal for emerging casinos is higher traffic than other casinos of a similar nature. There are actually two signals here: number of players, and number of spins.
 
-The pitfall is that these signals, this early in a casino's life, aren't an indication of player retention or true player value, which is the ultimate goal. High traffic early on can look like promise but tell us nothing about whether those players stick around or become valuable long-term — so on their own, these signals are more noise than signal for what actually matters.
+The pitfall is that these signals, this early in a casino's life, aren't an indication of player retention or true player value, which is the ultimate goal. High traffic early on can look like promise but tell us nothing about whether those players stick around or become valuable long-term - so on their own, these signals are more noise than signal for what actually matters.
 
 ## 2. Increasing Reach
 
-Growth in a casino translates to three things: increased registration numbers, increased deposits, and player retention — players coming back for a second, third, fourth session instead of dropping off after the first, which is what we often see.
+Growth in a casino translates to three things: increased registration numbers, increased deposits, and player retention - players coming back for a second, third, fourth session instead of dropping off after the first, which is what we often see.
 
 The game recommender and player-prediction models can indicate to a casino if there are gaps in the variety they offer players, compared to other similar casinos. The causal model can indicate the underlying causes affecting spins and wagering, which is a proxy for deposits.
 
